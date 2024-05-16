@@ -1,0 +1,49 @@
+name: ecspresso
+
+on:
+    push:
+        branches:
+            - '**'
+
+jobs:
+    ecspresso:
+        runs-on: ubuntu-latest
+
+        timeout-minutes: 5
+
+        permissions:
+          id-token: write
+          contents: read
+          pull-requests: write
+          repository-projects: read
+
+        steps:
+            - name: Generate Token
+              id: generate_token
+              uses: actions/create-github-app-token@v1
+              with:
+                app-id: ${{ secrets.APP_ID }}
+                private-key: ${{ secrets.PRIVATE_KEY }}
+
+            - name: Checkout
+              id: checkout
+              uses: actions/checkout@v4
+              with:
+                token: ${{ steps.generate_token.outputs.token }}
+                ref: ${{ github.base_ref }}
+                fetch-depth: 0
+            - uses: aws-actions/configure-aws-credentials@v4
+              with:
+                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                aws-region: us-east-1
+            - name: ecspresso verify
+              uses: kayac/ecspresso@v2
+              with:
+                version: v2.3.3
+            - run: ecspresso verify --config ./ecspresso/hello-world/ecspresso.yml
+            - name: ecspresso deploy
+              uses: kayac/ecspresso@v2
+              with:
+                version: v2.3.3
+            - run: ecspresso deploy --config ./ecspresso/hello-world/ecspresso.yml
