@@ -16,8 +16,8 @@
       "name": "hello-world",
       "portMappings": [
         {
-          "appProtocol": "http",
-          "containerPort": 80,
+          "appProtocol": "791848147212.dkr.ecr.us-east-1.amazonaws.com/api-server:latest",
+          "containerPort": 8080,
           "hostPort": 80,
           "name": "hello-world-80-tcp",
           "protocol": "tcp"
