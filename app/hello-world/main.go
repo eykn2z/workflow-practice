@@ -11,5 +11,5 @@ func main() {
 			"message": "hello",
 		})
 	})
-	r.Run(":8080")
+	r.Run(":80")
 }
