@@ -1,0 +1,28 @@
+name: Prod Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-project:
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      node-version: '18.x'
+    secrets:
+      build-command: 'build:prod'
+
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: front
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run lint
+        run: |
+          npm ci
+          npm run lint
