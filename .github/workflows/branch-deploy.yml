@@ -23,6 +23,7 @@ jobs:
         id: branch-deploy
         with:
           trigger: ".deploy"
+          allow_non_default_target_branch_deployments: true
 
       # Run your deployment logic for your project here - examples seen below
 
