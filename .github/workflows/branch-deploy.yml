@@ -42,4 +42,4 @@ jobs:
       # conditionally run a regular deployment
       - name: fake regular deploy
         if: ${{ steps.branch-deploy.outputs.continue == 'true' && steps.branch-deploy.outputs.noop != 'true' }}
-        run: echo "I am doing a fake regular deploy"
+        run: echo "I am doing a fake regular deploy!"
