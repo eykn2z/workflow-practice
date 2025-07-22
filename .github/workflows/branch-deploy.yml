@@ -2,8 +2,10 @@ name: "branch deploy demo"
 
 # The workflow to execute on is comments that are newly created
 on:
-  issue_comment:
-    types: [created]
+    issue_comment:
+        types: [created]
+    pull_request:
+        types: [opened, synchronize, reopened]
 
 # Permissions needed for reacting and adding comments for IssueOps commands
 permissions:
