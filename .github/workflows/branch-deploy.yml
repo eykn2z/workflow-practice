@@ -14,6 +14,7 @@ permissions:
 
 jobs:
   demo:
+    if: ${{ github.event.issue.pull_request }} # only run on pull request comments
     runs-on: ubuntu-latest
     steps:
       # Execute IssueOps branch deployment logic, hooray!
@@ -22,6 +23,7 @@ jobs:
         id: branch-deploy
         with:
           trigger: ".deploy"
+          allow_non_default_target_branch_deployments: true
 
       # Run your deployment logic for your project here - examples seen below
 
