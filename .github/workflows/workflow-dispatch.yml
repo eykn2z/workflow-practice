@@ -1,0 +1,13 @@
+name: Prod Apply
+
+on:
+  workflow_dispatch:
+
+jobs:
+  prod-apply:
+    name: Prod Apply
+    runs-on: ubuntu-latest
+    environment:
+      name: prod
+    steps:
+      - run: echo "本番デプロイ"
