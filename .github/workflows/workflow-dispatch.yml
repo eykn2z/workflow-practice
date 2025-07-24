@@ -2,6 +2,8 @@ name: Prod Apply
 
 on:
   workflow_dispatch:
+    branches:
+      - main
 
 jobs:
   prod-apply:
